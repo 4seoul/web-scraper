@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 from crawl import normalize_url, get_heading_from_html, get_first_paragraph_from_html, get_urls_from_html, get_images_from_html, extract_page_data
-
+import requests
 
 
 def extract_page_data(html, page_url):
@@ -18,4 +18,8 @@ def extract_page_data(html, page_url):
 input_url = "https://crawler-test.com"
 input_body = "<html><body><div>No h1, p, links, or images</div></body></html>"
 
-print(extract_page_data(input_body, input_url))
+def get_html(url):
+	r = requests.get(url, headers={"User-Agent": "BootCrawler/1.0"})
+	print(r.text)
+
+get_html("https://wagslane.dev")
